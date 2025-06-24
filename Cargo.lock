@@ -3,6 +3,18 @@
 version = 4
 
 [[package]]
+name = "abi"
+version = "0.1.0"
+source = "git+https://github.com/cbiffle/hubris-fork.git?branch=cbiffle%2Fexhubris-fixes#061df2fc76433bbc7cc3931a8981fbd509e35c97"
+dependencies = [
+ "bitflags",
+ "byteorder",
+ "phash",
+ "serde",
+ "zerocopy 0.6.6",
+]
+
+[[package]]
 name = "addr2line"
 version = "0.24.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -79,12 +91,26 @@ dependencies = [
 ]
 
 [[package]]
+name = "anyhow"
+version = "1.0.98"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e16d2d3311acee920a9eb8d33b8cbc1787ce4a264e85f964c2404b969bdcd487"
+
+[[package]]
 name = "arbitrary"
 version = "1.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "dde20b3d026af13f561bdd0f15edf01fc734f0dafcedbaf42bba506a9517f223"
 dependencies = [
  "derive_arbitrary",
+]
+
+[[package]]
+name = "armv8-m-mpu"
+version = "0.1.0"
+source = "git+https://github.com/cbiffle/hubris-fork.git?branch=cbiffle%2Fexhubris-fixes#061df2fc76433bbc7cc3931a8981fbd509e35c97"
+dependencies = [
+ "cortex-m",
 ]
 
 [[package]]
@@ -191,6 +217,20 @@ dependencies = [
 ]
 
 [[package]]
+name = "build-util"
+version = "0.1.0"
+source = "git+https://github.com/cbiffle/hubris-fork.git?branch=cbiffle%2Fexhubris-fixes#061df2fc76433bbc7cc3931a8981fbd509e35c97"
+dependencies = [
+ "anyhow",
+ "indexmap 1.9.3",
+ "ordered-toml",
+ "serde",
+ "serde_json",
+ "toml 0.7.8",
+ "toml-task",
+]
+
+[[package]]
 name = "bumpalo"
 version = "3.17.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -221,6 +261,14 @@ dependencies = [
  "cc",
  "libc",
  "pkg-config",
+]
+
+[[package]]
+name = "call_rustfmt"
+version = "0.1.0"
+source = "git+https://github.com/cbiffle/hubris-fork.git?branch=cbiffle%2Fexhubris-fixes#061df2fc76433bbc7cc3931a8981fbd509e35c97"
+dependencies = [
+ "anyhow",
 ]
 
 [[package]]
@@ -365,6 +413,26 @@ dependencies = [
  "bitfield",
  "embedded-hal",
  "volatile-register",
+]
+
+[[package]]
+name = "cortex-m-rt"
+version = "0.7.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "801d4dec46b34c299ccf6b036717ae0fce602faa4f4fe816d9013b9a7c9f5ba6"
+dependencies = [
+ "cortex-m-rt-macros",
+]
+
+[[package]]
+name = "cortex-m-rt-macros"
+version = "0.7.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e37549a379a9e0e6e576fd208ee60394ccb8be963889eebba3ffe0980364f472"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.96",
 ]
 
 [[package]]
@@ -514,6 +582,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "encode_unicode"
+version = "0.3.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a357d28ed41a50f9c765dbfe56cbc04a64e53e5fc58ba79fbc34c10ef3df831f"
+
+[[package]]
 name = "equivalent"
 version = "1.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -591,6 +665,12 @@ dependencies = [
 
 [[package]]
 name = "hashbrown"
+version = "0.12.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8a9ee70c43aaf417c914396645a0fa852624801b24ebb7ae78fe8272889ac888"
+
+[[package]]
+name = "hashbrown"
 version = "0.15.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bf151400ff0baff5465007dd2f3e717f3fe502074ca563069ce3a6629d07b289"
@@ -648,7 +728,7 @@ dependencies = [
  "goblin",
  "hubris-region-alloc",
  "ihex",
- "indexmap",
+ "indexmap 2.7.1",
  "itertools",
  "kdl",
  "lazy_static",
@@ -666,7 +746,7 @@ dependencies = [
  "syn 2.0.96",
  "tempdir",
  "thiserror 2.0.11",
- "toml",
+ "toml 0.8.19",
  "zip",
 ]
 
@@ -714,12 +794,23 @@ checksum = "365a784774bb381e8c19edb91190a90d7f2625e057b55de2bc0f6b57bc779ff2"
 
 [[package]]
 name = "indexmap"
+version = "1.9.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bd070e393353796e801d209ad339e89596eb4c8d430d18ede6a1cced8fafbd99"
+dependencies = [
+ "autocfg",
+ "hashbrown 0.12.3",
+ "serde",
+]
+
+[[package]]
+name = "indexmap"
 version = "2.7.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8c9c992b02b5b4c94ea26e32fe5bccb7aa7d9f390ab5c1221ff895bc7ea8b652"
 dependencies = [
  "equivalent",
- "hashbrown",
+ "hashbrown 0.15.2",
  "serde",
 ]
 
@@ -777,7 +868,51 @@ dependencies = [
  "miette",
  "num",
  "thiserror 1.0.69",
- "winnow",
+ "winnow 0.6.25",
+]
+
+[[package]]
+name = "kern"
+version = "0.1.0"
+source = "git+https://github.com/cbiffle/hubris-fork.git?branch=cbiffle%2Fexhubris-fixes#061df2fc76433bbc7cc3931a8981fbd509e35c97"
+dependencies = [
+ "abi",
+ "anyhow",
+ "armv8-m-mpu",
+ "bitflags",
+ "build-kconfig",
+ "build-util",
+ "byteorder",
+ "call_rustfmt",
+ "cfg-if",
+ "cortex-m",
+ "indexmap 1.9.3",
+ "kerncore",
+ "phash",
+ "phash-gen",
+ "proc-macro2",
+ "quote",
+ "ron",
+ "serde",
+ "ssmarshal",
+ "syn 1.0.109",
+ "unwrap-lite",
+ "zerocopy 0.6.6",
+]
+
+[[package]]
+name = "kerncore"
+version = "0.1.0"
+source = "git+https://github.com/cbiffle/hubris-fork.git?branch=cbiffle%2Fexhubris-fixes#061df2fc76433bbc7cc3931a8981fbd509e35c97"
+
+[[package]]
+name = "kernel-generic-stm32f411"
+version = "0.1.0"
+dependencies = [
+ "cortex-m",
+ "cortex-m-rt",
+ "kern",
+ "stm32-metapac",
 ]
 
 [[package]]
@@ -978,8 +1113,8 @@ checksum = "62948e14d923ea95ea2c7c86c71013138b66525b86bdc08d2dcc262bdb497b87"
 dependencies = [
  "crc32fast",
  "flate2",
- "hashbrown",
- "indexmap",
+ "hashbrown 0.15.2",
+ "indexmap 2.7.1",
  "memchr",
  "ruzstd",
 ]
@@ -989,6 +1124,15 @@ name = "once_cell"
 version = "1.20.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1261fe7e33c73b354eab43b1273a57c8f967d0391e80353e51f764ac02cf6775"
+
+[[package]]
+name = "ordered-toml"
+version = "0.1.0"
+source = "git+https://github.com/oxidecomputer/ordered-toml#3fdce7ade3610b84e2bbd0130442be76cb0f8210"
+dependencies = [
+ "indexmap 1.9.3",
+ "serde",
+]
 
 [[package]]
 name = "owo-colors"
@@ -1027,6 +1171,22 @@ checksum = "f8ed6a7761f76e3b9f92dfb0a60a6a6477c61024b775147ff0973a02653abaf2"
 dependencies = [
  "digest",
  "hmac",
+]
+
+[[package]]
+name = "phash"
+version = "0.1.0"
+source = "git+https://github.com/cbiffle/hubris-fork.git?branch=cbiffle%2Fexhubris-fixes#061df2fc76433bbc7cc3931a8981fbd509e35c97"
+
+[[package]]
+name = "phash-gen"
+version = "0.1.0"
+source = "git+https://github.com/cbiffle/hubris-fork.git?branch=cbiffle%2Fexhubris-fixes#061df2fc76433bbc7cc3931a8981fbd509e35c97"
+dependencies = [
+ "anyhow",
+ "phash",
+ "rand 0.8.5",
+ "rand_chacha",
 ]
 
 [[package]]
@@ -1393,10 +1553,30 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3c5e1a9a646d36c3599cd173a41282daf47c44583ad367b8e6837255952e5c67"
 
 [[package]]
+name = "ssmarshal"
+version = "1.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f3e6ad23b128192ed337dfa4f1b8099ced0c2bf30d61e551b65fda5916dbb850"
+dependencies = [
+ "encode_unicode",
+ "serde",
+]
+
+[[package]]
 name = "static_assertions"
 version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a2eb9349b6444b326872e140eb1cf5e7c522154d69e7a0ffb0fb81c06b37543f"
+
+[[package]]
+name = "stm32-metapac"
+version = "15.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "deabea56a8821dcea05d0109f3ab3135f31eb572444e5da203d06149c594c8c6"
+dependencies = [
+ "cortex-m",
+ "cortex-m-rt",
+]
 
 [[package]]
 name = "strsim"
@@ -1563,15 +1743,38 @@ checksum = "ef927ca75afb808a4d64dd374f00a2adf8d0fcff8e7b184af886c3c87ec4a3f3"
 
 [[package]]
 name = "toml"
+version = "0.7.8"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "dd79e69d3b627db300ff956027cc6c3798cef26d22526befdfcd12feeb6d2257"
+dependencies = [
+ "serde",
+ "serde_spanned",
+ "toml_datetime",
+ "toml_edit 0.19.15",
+]
+
+[[package]]
+name = "toml"
 version = "0.8.19"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a1ed1f98e3fdc28d6d910e6737ae6ab1a93bf1985935a1193e68f93eeb68d24e"
 dependencies = [
- "indexmap",
+ "indexmap 2.7.1",
  "serde",
  "serde_spanned",
  "toml_datetime",
- "toml_edit",
+ "toml_edit 0.22.22",
+]
+
+[[package]]
+name = "toml-task"
+version = "0.1.0"
+source = "git+https://github.com/cbiffle/hubris-fork.git?branch=cbiffle%2Fexhubris-fixes#061df2fc76433bbc7cc3931a8981fbd509e35c97"
+dependencies = [
+ "anyhow",
+ "indexmap 1.9.3",
+ "ordered-toml",
+ "serde",
 ]
 
 [[package]]
@@ -1585,15 +1788,28 @@ dependencies = [
 
 [[package]]
 name = "toml_edit"
+version = "0.19.15"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1b5bb770da30e5cbfde35a2d7b9b8a2c4b8ef89548a7a6aeab5c9a576e3e7421"
+dependencies = [
+ "indexmap 2.7.1",
+ "serde",
+ "serde_spanned",
+ "toml_datetime",
+ "winnow 0.5.40",
+]
+
+[[package]]
+name = "toml_edit"
 version = "0.22.22"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4ae48d6208a266e853d946088ed816055e556cc6028c5e8e2b84d9fa5dd7c7f5"
 dependencies = [
- "indexmap",
+ "indexmap 2.7.1",
  "serde",
  "serde_spanned",
  "toml_datetime",
- "winnow",
+ "winnow 0.6.25",
 ]
 
 [[package]]
@@ -1641,6 +1857,11 @@ name = "unicode-width"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1fc81956842c57dac11422a97c3b8195a1ff727f06e85c84ed2e8aa277c9a0fd"
+
+[[package]]
+name = "unwrap-lite"
+version = "0.1.0"
+source = "git+https://github.com/cbiffle/hubris-fork.git?branch=cbiffle%2Fexhubris-fixes#061df2fc76433bbc7cc3931a8981fbd509e35c97"
 
 [[package]]
 name = "userlib"
@@ -1788,11 +2009,30 @@ checksum = "589f6da84c646204747d1270a2a5661ea66ed1cced2631d546fdfb155959f9ec"
 
 [[package]]
 name = "winnow"
+version = "0.5.40"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f593a95398737aeed53e489c785df13f3618e41dbcd6718c6addbf1395aa6876"
+dependencies = [
+ "memchr",
+]
+
+[[package]]
+name = "winnow"
 version = "0.6.25"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ad699df48212c6cc6eb4435f35500ac6fd3b9913324f938aea302022ce19d310"
 dependencies = [
  "memchr",
+]
+
+[[package]]
+name = "zerocopy"
+version = "0.6.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "854e949ac82d619ee9a14c66a1b674ac730422372ccb759ce0c39cabcf2bf8e6"
+dependencies = [
+ "byteorder",
+ "zerocopy-derive 0.6.6",
 ]
 
 [[package]]
@@ -1812,6 +2052,17 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a367f292d93d4eab890745e75a778da40909cab4d6ff8173693812f79c4a2468"
 dependencies = [
  "zerocopy-derive 0.8.14",
+]
+
+[[package]]
+name = "zerocopy-derive"
+version = "0.6.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "125139de3f6b9d625c39e2efdd73d41bdac468ccd556556440e322be0e1bbd91"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.96",
 ]
 
 [[package]]
@@ -1872,7 +2123,7 @@ dependencies = [
  "displaydoc",
  "flate2",
  "hmac",
- "indexmap",
+ "indexmap 2.7.1",
  "lzma-rs",
  "memchr",
  "pbkdf2",

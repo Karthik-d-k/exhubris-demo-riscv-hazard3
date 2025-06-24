@@ -1,0 +1,53 @@
+chip "STM32F411VE"
+target-triple "thumbv7em-none-eabihf"
+vector-table-size 0x190
+probe-rs-name "STM32F411VETx"
+
+compatible {
+    - "STM32F411VE" // flash size + pin count
+    - "STM32F411XE" // flash size only
+    - "STM32F411" // subfamily only
+    - "STM32F4" // family only
+    - "arm-cortex-m4" // microprocessor generic name
+}
+
+memory {
+    region "vectors" {
+        base 0x0800_0000
+        size 0x200 // enlarged to accommodate header
+        read
+    }
+    region "flash" {
+        base 0x0800_0200
+        size 0x7FE00
+        read
+        execute
+    }
+    region "ram" {
+        base 0x2000_0000
+        size 0x20000
+        read
+        write
+    }
+}
+
+peripheral "usart2" {
+    base 0x4000_4400
+    size 0x400
+    irq "irq" 38
+}
+
+peripheral "rcc" {
+    base 0x4002_3800
+    size 0x400
+}
+
+peripheral "gpioa" {
+    base 0x4002_0000
+    size 0x400
+}
+
+peripheral "gpiod" {
+    base 0x4002_0c00
+    size 0x400
+}

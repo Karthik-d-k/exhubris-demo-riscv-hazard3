@@ -1,4 +1,4 @@
-# Standalone Hubris Project Demo
+# Standalone Hubris Project Demo using STM32F411VE
 
 This is a simple standalone firmware application built using Hubris, without
 having to include either Hubris or its build tools in the repo. This serves as a
@@ -30,7 +30,7 @@ This consists of five tasks that occupy 2 kiB of flash and 992 bytes of RAM.
 On top of that, the kernel uses 9.5 kiB flash (plus 256 bytes for the vector
 table), and 552 bytes of RAM. So a total of 11.5 kiB flash, 1.5 kiB RAM.
 
-Even on the wee STM32G031K8, this is only 18% of flash and 19% of RAM. The rest
+Even on the wee STM32F411VE, this is only 18% of flash and 19% of RAM. The rest
 is yours to play with.
 
 (This information may be out of date, run a build to see the current stats.)
@@ -54,16 +54,15 @@ Next, in this repo, run:
 hubake build app.kdl
 ```
 
-This will produce a _build archive file_ named `demo-build.zip`. (It will also
-produce ELF files in `.work/demo/final` if you want to examine them without
+This will produce a _build archive file_ named `stm32f4-build.zip`. (It will also
+produce ELF files in `.work/stm32f4/final` if you want to examine them without
 unzipping.)
 
 
 ## How to actually run this on a board
 
-The demo in this repo is currently intended for the [ST NUCLEO-G031K8
-board][nuc], which is currently cheaply available in most places for USD$11 or
-less. You need one of those boards, and a fairly recent version of [Humility].
+The demo in this repo is currently intended for the [ST STM32F411 Discovery
+board]. You need one of those boards, and a fairly recent version of [Humility].
 
 If you don't have Humility installed, or need to update your copy, run:
 
@@ -72,22 +71,22 @@ cargo install --git https://github.com/oxidecomputer/humility humility --locked
 ```
 
 Now, plug in your Nucleo board over USB, and point Humility to the
-`demo-build.zip` file we produced in the previous step:
+`stm32f4-build.zip` file we produced in the previous step:
 
 ```
-humility -a demo-build.zip flash
+humility -a stm32f4-build.zip flash
 ```
 
 You should see something like this:
 
 ```
-humility: attaching with chip set to "STM32G031K8Tx"
+humility: attaching with chip set to "STM32F411VETx"
 humility: attached via ST-Link V2-1
 humility: flash/archive mismatch; reflashing
 humility: flashing done
 ```
 
-and the green LED on your Nucleo should now be blinking.
+and the green LED on your Discovery board should now be ON.
 
 
 ## How to use GDB
@@ -99,7 +98,7 @@ After running a build, use the `pack-hex` command to produce both a `hex` file
 for OpenOCD, and a `gdbconfig` for gdb:
 
 ```
-hubake pack-hex .work/demo/final output.hex -g gdbconfig
+hubake pack-hex .work/stm32f4/final/ output.hex -g gdbconfig
 ```
 
 And then in one terminal, start openocd and ask it to flash the hex file and
@@ -136,6 +135,8 @@ The main files are:
 
 - `pong` and `ping`: simple custom tasks that interact over IPC.
 
+- `kernel-generic-stm32f411`: Generic Hubris kernel wrapper / startup routine that fires up the kernel.
+
 - `Cargo.toml`: explains where to find the code for `ping` and `pong`, and
   centralizes some dependency declarations. Exhubris projects are currently
   required to be Cargo projects, but I hope to loosen this in the future. It
@@ -151,6 +152,5 @@ unnecessary eventually:
   reference these from an external source, so that everyone doesn't wind up
   copying them into their repo.
 
-[nuc]: https://www.st.com/en/evaluation-tools/nucleo-g031k8.html
 [exhubris project]: https://github.com/cbiffle/exhubris/
 [Humility]: https://github.com/oxidecomputer/humility/

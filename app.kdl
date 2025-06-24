@@ -1,26 +1,22 @@
-// Demo Application Definition
+// stm32f4 Application Definition
 
 // App name is used for output files etc. It must be the first non-blank
 // non-comment line in the file.
-app demo
+app stm32f4
 
 // Currently the board information is inlined. It would be nice to refer to an
 // external file, like we already do for chip definitions.
-board nucleo-g031k8 {
-    chip "proj:chips/stm32g031k8.kdl"
+board stm32f4-dioscovery {
+    chip "proj:chips/stm32f411ve.kdl"
 }
 
 // Instructions for building the kernel.
 kernel {
-    // We'll pull in a kernel definition from exhubris's git repo.
-    git-crate {
-        repo "https://github.com/cbiffle/exhubris/"
-        package kernel-generic-stm32g031
-        rev "69d2f5ca8017fc3aaf692eae9455ac9fcd883173"
-    }
+    // We'll pull in a kernel definition from hubris-fork git repo.
+    workspace-crate kernel-generic-stm32f411
     // The kernel itself should provide this information eventually, but for now
     // we have to state it:
-    stack-size 544
+    stack-size 896
 }
 
 // Supervisor task. Every nontrivial application needs one. The exhubris
@@ -38,6 +34,7 @@ task super {
     stack-size 128
 }
 
+/*
 // System peripheral sharing for G0. This lets other tasks conveniently access
 // GPIO and clock trees.
 task sys {
@@ -72,6 +69,7 @@ task ping {
 
     notification timer
 }
+*/
 
 // Idle task. Every application needs one, few applications want to write their
 // own. We pull in a standard one from git:
