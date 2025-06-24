@@ -1,6 +1,6 @@
 # Tells hubake what version of the tools we expect.
 
 [system]
-source = "git"
-repo = "https://github.com/Karthik-d-k/exhubris-riscv-hazard3"
-rev = "0802ec581cd4cafed83f5c8de8d920b85a4a09cc"
+source = "local-git"
+path = "C:/Users/adt8kor/wws/riscv/exhubris-riscv-hazard3/tools/build"
+rev = "riscv"
