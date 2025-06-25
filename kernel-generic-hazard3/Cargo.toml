@@ -6,7 +6,7 @@ edition = "2021"
 [dependencies]
 riscv = { version = "0.14.0", features = ["s-mode"] }
 riscv-rt = { version = "0.15.0", features = ["s-mode"] }
-rp235x-pac = "0.1.0"
+rp235x-pac = { version = "0.1.0", features = ["rt"] }
 
 [dependencies.hubris-kern]
 package = "kern"
