@@ -16,31 +16,33 @@ kernel {
     workspace-crate kernel-generic-hazard3
     // The kernel itself should provide this information eventually, but for now
     // we have to state it:
-    stack-size 896
+    stack-size 1024
+    // disable default features for now
+    //no-default-features
 }
 
 // Supervisor task. Every nontrivial application needs one. The exhubris
 // minisuper implementation is good for most simple systems.
 task super {
     git-crate {
-        repo "https://github.com/cbiffle/exhubris/"
+        repo "https://github.com/Karthik-d-k/exhubris-riscv-hazard3/"
         package minisuper
-        rev "69d2f5ca8017fc3aaf692eae9455ac9fcd883173"
+        rev "9415ab0acd5586ba93ee4cef47595a5527af3123"
     }
     priority 0
 
     // Eventually, tasks should be able to indicate their stack requirement
     // somehow, but for now we have to state it:
-    stack-size 128
+    stack-size 128 // 256 bytes on a part with an FPU
 }
 
 // Idle task. Every application needs one, few applications want to write their
 // own. We pull in a standard one from git:
 // task idle {
 //     git-crate {
-//         repo "https://github.com/cbiffle/exhubris/"
+//         repo "https://github.com/Karthik-d-k/exhubris-riscv-hazard3/"
 //         package idle
-//         rev "69d2f5ca8017fc3aaf692eae9455ac9fcd883173"
+//         rev "9415ab0acd5586ba93ee4cef47595a5527af3123"
 //     }
 //     stack-size 32
 //     priority 4
